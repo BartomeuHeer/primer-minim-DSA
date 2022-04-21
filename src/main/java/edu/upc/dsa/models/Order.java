@@ -8,6 +8,9 @@ public class Order {
         DELIVERED
     }
     private int id;
+
+
+
     private HashMap<String,Integer> productQuant;
 
 
@@ -24,6 +27,14 @@ public class Order {
         this.id = id;
     }
 
+    public HashMap<String, Integer> getProductQuant() {
+        return productQuant;
+    }
+
+    public void setProductQuant(HashMap<String, Integer> productQuant) {
+        this.productQuant = productQuant;
+    }
+
     public void addLP(int quant, String product){
         productQuant.put(product,quant);
     }
@@ -31,4 +42,5 @@ public class Order {
     public int getQuantity(String prodName){
         return productQuant.get(prodName);
     }
+
 }

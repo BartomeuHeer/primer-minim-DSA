@@ -11,5 +11,5 @@ public interface ProductManager {
     public List<Products> getListProductsBySells();
     public Order deliverOrder();
     public void placeOrder(Order o,User u);
-
+    public void addUser(int id,String name);
 }
