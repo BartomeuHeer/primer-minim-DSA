@@ -28,16 +28,16 @@ public class Main {
         final ResourceConfig rc = new ResourceConfig().packages("edu.upc.dsa.services");
 
         rc.register(io.swagger.jaxrs.listing.ApiListingResource.class);
-        rc.register(io.swagger.jaxrs.listing.SwaggerSerializers.class);
+        rc.register(io.swagger.jaxrs.listing.SwaggerSerializers.class);//de json a gson etc
 
         BeanConfig beanConfig = new BeanConfig();
-
+        //metinfo
         beanConfig.setHost("localhost:8080");
         beanConfig.setBasePath("/dsaApp");
         beanConfig.setContact("support@example.com");
         beanConfig.setDescription("REST API for Tracks Manager");
         beanConfig.setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html");
-        beanConfig.setResourcePackage("edu.upc.dsa.services");
+        beanConfig.setResourcePackage("edu.upc.dsa.services");//packet on hi ha recursos
         beanConfig.setTermsOfServiceUrl("http://www.example.com/resources/eula");
         beanConfig.setTitle("REST API");
         beanConfig.setVersion("1.0.0");
@@ -57,7 +57,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         final HttpServer server = startServer();
 
-        StaticHttpHandler staticHttpHandler = new StaticHttpHandler("./public/");
+        StaticHttpHandler staticHttpHandler = new StaticHttpHandler("./public/");//carpeta on hi ha el contingut static com js
         server.getServerConfiguration().addHttpHandler(staticHttpHandler, "/");
 
 
