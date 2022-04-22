@@ -4,14 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class User {
-    private int id;
+    private String id;
     private String name;
-    private List<Order> orderList;
 
-    public User(int id, String name) {
+    public User(String id, String name) {
         this.id = id;
         this.name = name;
-        this.orderList = new LinkedList<>();
     }
 
     public String getName() {
@@ -22,19 +20,12 @@ public class User {
         this.name = name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public List<Order> getOrderList() {
-        return orderList;
-    }
-
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
-    }
 }

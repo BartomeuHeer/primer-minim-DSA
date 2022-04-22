@@ -6,10 +6,9 @@ import java.util.List;
 
 public interface ProductManager {
 
-    public void addProduct(String id,double price,int sells);
-    public List<Products> getListProductsByPrice();
-    public List<Products> getListProductsBySells();
+    public void addProduct(String id,double price);
+    public List<Product> getListProductsByPrice();
+    public List<Product> getListProductsBySells();
     public Order deliverOrder();
-    public void placeOrder(Order o,User u);
-    public void addUser(int id,String name);
+    public void placeOrder(Order o,String u);
 }

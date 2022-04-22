@@ -8,59 +8,53 @@ import java.util.*;
 import org.apache.log4j.Logger;
 
 public class ProductManagerImpl implements ProductManager {
-    private List<Products> productsList;
-    //private HashMap<User,List<Order>> userOrderMap;
+    //contenidors
+    private List<Product> productsList;
     private Queue<Order> orderQueue;
-    private List<User> userList;
+    HashMap<String,User> userByID;
+    //instancia
     private static ProductManagerImpl instance;
+    //logs
     final static Logger logger = Logger.getLogger(ProductManagerImpl.class);
-    public static ProductManagerImpl getInstance(){
-        logger.info(instance);
-        if(instance == null)
-            instance = new ProductManagerImpl();
-        logger.info(instance);
-        return instance;
-    }
 
     private ProductManagerImpl() {
         productsList = new LinkedList<>();
-        //userOrderMap = new HashMap<>();
         orderQueue = new ArrayDeque<>();
-        userList = new LinkedList<>();
+        userByID = new HashMap<>();
+    }
+    public static ProductManagerImpl getInstance(){
+        //logger.info(instance);
+        if(instance == null)
+            instance = new ProductManagerImpl();
+        //logger.info(instance);
+        return instance;
     }
 
     @Override
-    public List<Products> getListProductsByPrice() {
-        productsList.sort(Comparator.comparingDouble(Products::getPrice));
+    public List<Product> getListProductsByPrice() {
+        productsList.sort(Comparator.comparingDouble(Product::getPrice));
         return productsList;
     }
 
     @Override
-    public List<Products> getListProductsBySells(){
-        productsList.sort(Comparator.comparingDouble(Products::getNumSells).reversed());
+    public List<Product> getListProductsBySells(){
+        productsList.sort(Comparator.comparingDouble(Product::getNumSells).reversed());
         return productsList;
     }
     @Override
-    public void addProduct(String id, double price,int sells){ productsList.add(new Products(id,price,sells)); }
+    public void addProduct(String id, double price){ productsList.add(new Product(id,price)); }
 
     @Override
-    public void addUser(int id, String name) {
-        userList.add(new User(id,name));
-    }
-
-    @Override
-    public void placeOrder(Order o,User u){
+    public void placeOrder(Order o,String u){
+        o.addUser(u);
         orderQueue.add(o);
-        if(userList.contains(u))
-
-        else
-
     }
     @Override
     public Order deliverOrder() {
-        Order order =  orderQueue.poll();
-        for (String product: order.getProductQuant().keySet()) {
-
-        }
+        Order o = orderQueue.poll();
+        User u = userByID.get(o.getUser());
+        for (LP lp: o.getProductQuant())
+            productsList.get(productsList.indexOf(lp.getProduct())).addNumSells(lp.getQuantity());
+        return o;
     }
 }
