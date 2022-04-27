@@ -44,6 +44,17 @@ public class ProductManagerImpl implements ProductManager {
     @Override
     public void addProduct(String id, double price){ productsList.add(new Product(id,price)); }
 
+    private int getProduct(String id){
+        int product = -1;
+        for (Product p: productsList) {
+            if(p.getId().equals(id)) {
+                product = productsList.indexOf(p);
+                return product;
+            }
+        }
+        return product;
+    }
+
     @Override
     public void placeOrder(Order o,String u){
         o.addUser(u);
@@ -53,8 +64,16 @@ public class ProductManagerImpl implements ProductManager {
     public Order deliverOrder() {
         Order o = orderQueue.poll();
         User u = userByID.get(o.getUser());
-        for (LP lp: o.getProductQuant())
-            productsList.get(productsList.indexOf(lp.getProduct())).addNumSells(lp.getQuantity());
+        int index;
+        for (LP lp: o.getProductQuant()) {
+            index = getProduct(lp.getProductID());
+            if(index == -1)
+                logger.warn("Product null");
+            else {
+                productsList.get(index).addNumSells(lp.getQuantity());
+                logger.info("Product: " + productsList.get(index).getId() + " -> " + productsList.get(index).getNumSells());
+            }
+        }
         return o;
     }
 }

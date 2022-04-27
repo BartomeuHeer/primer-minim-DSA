@@ -4,19 +4,19 @@ import java.util.List;
 
 public class LP {
     private int quantity;
-    private Product product;
+    private String productID;
 
     public LP(String p,int q){
         this.quantity = q;
-        this.product = new Product(p);
+        this.productID = p;
     }
 
-    public Product getProduct() {
-        return product;
+    public String getProductID() {
+        return productID;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductID(String pID) {
+        this.productID = pID;
     }
 
     public int getQuantity() {

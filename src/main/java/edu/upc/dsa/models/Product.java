@@ -10,9 +10,9 @@ public class Product {
         this.price = price;
         this.numSells = 0;
     }
-    public Product(String id) {
+    /*public Product(String id) {
         this.id = id;
-    }
+    }*/
 
     public String getId() {
         return id;
@@ -39,6 +39,6 @@ public class Product {
     }
 
     public void addNumSells(int sells){
-        this.numSells =+ sells;
+        this.numSells += sells;
     }
 }
