@@ -30,6 +30,17 @@ public class ProductManagerImpl implements ProductManager {
         return instance;
     }
 
+    public int productSize(){
+        int s = productsList.size();
+        logger.info("Products: " + s);
+        return s;
+    }
+
+    public List<Product> getProductsList() {
+        return productsList;
+    }
+
+
     @Override
     public List<Product> getListProductsByPrice() {
         productsList.sort(Comparator.comparingDouble(Product::getPrice));
