@@ -54,7 +54,7 @@ public class ProductManagerImpl implements ProductManager {
         Order o = orderQueue.poll();
         User u = userByID.get(o.getUser());
         for (LP lp: o.getProductQuant())
-            productsList.get(productsList.indexOf(lp.getProduct())).addNumSells(lp.getQuantity());
+            productsList.get(productsList.indexOf(lp.getProduct())).addNumSells(lp.getQuantity()); //
         return o;
     }
 }
